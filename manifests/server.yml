@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+
+      containers:
+      - name: server
+        image: quay.io/smalleni/netperf:latest
+        command: ["iperf3"]
+        args: ["-s"]
+        ports:
+        - containerPort: 5201
+          name: server
+      terminationGracePeriodSeconds: 0
