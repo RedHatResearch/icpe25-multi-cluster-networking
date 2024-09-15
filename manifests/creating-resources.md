@@ -13,8 +13,7 @@ oc expose deployment server
 On cluster-1, after exporting the appropriate path to the KUBECONFIG
 
 ```
-oc create -f throughput-config.yaml
-oc create -f rr-config.yaml
+oc create -f uperf-configs.yaml
 oc create -f client.yaml
 ```
 
