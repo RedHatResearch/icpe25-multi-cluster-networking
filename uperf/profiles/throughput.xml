@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <profile name="throughput">
   <group nthreads="$nthr">
-        <transaction iterations="1">
-            <flowop type="connect" options="remotehost=$h protocol=tcp port=40000
-        </transaction>
-        <transaction duration="30s">
-            <flowop type="write" options= "size=64K"/>
-        </transaction>
-        <transaction iterations="1">
-            <flowop type="disconnect" />
-        </transaction>
+      <transaction iterations="1">
+          <flowop type="connect" options="remotehost=$uperf_service_host protocol=tcp port=$uperf_service_port_uperf_data"/>
+      </transaction>
+      <transaction duration="60s">
+          <flowop type="write" options="size=$size"/>
+      </transaction>
+      <transaction iterations="1">
+          <flowop type="disconnect" />
+      </transaction>
   </group>
 </profile>
