@@ -13,7 +13,7 @@ export KUBECONFIG=<PATH to Kubeconfig>
 oc new-project server
 ```
 
-Deploy the resources need to setup the test by following this [doc] (../manifests/creating-resources.md)
+Deploy the resources need to setup the test by following this [doc](../manifests/creating-resources.md)
 
 ## Create sites
 
