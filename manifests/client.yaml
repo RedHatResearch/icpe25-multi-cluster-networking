@@ -18,4 +18,14 @@ spec:
       - name: client
         image: quay.io/smalleni/netperf:latest
         command: ["sleep", "inf"]
+        volumeMounts:
+        - name: throughput-volume
+          mountPath: /tmp/test
+      volumes:
+      - name: throughput-volume
+        configMap:
+          name: throughput-config
+          items:
+          - key: throughput.xml
+            path: throughput.xml
       terminationGracePeriodSeconds: 0

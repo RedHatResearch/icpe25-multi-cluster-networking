@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: throughput-config
+data:
+  throughput.xml: |
+    <?xml version="1.0"?>
+    <profile name="throughput">
+      <group nthreads="$nthr">
+          <transaction iterations="1">
+              <flowop type="connect" options="remotehost=$UPERF_CONTROL_SERVICE_HOST protocol=tcp port=$UPERF_DATA_PORT_40000_TCP_PORT"
+          </transaction>
+          <transaction duration="30s">
+              <flowop type="write" options= "size=64K"/>
+          </transaction>
+          <transaction iterations="1">
+              <flowop type="disconnect" />
+          </transaction>
+      </group>
+    </profile>

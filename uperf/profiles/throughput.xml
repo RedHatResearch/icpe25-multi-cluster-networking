@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <profile name="throughput">
-  <group nthreads="16">
+  <group nthreads="$nthr">
         <transaction iterations="1">
-            <flowop type="connect" options="remotehost=172.30.195.148 protocol=tcp port=40000
+            <flowop type="connect" options="remotehost=$h protocol=tcp port=40000
         </transaction>
         <transaction duration="30s">
-            <flowop type="write" options= "size=64L"/>
+            <flowop type="write" options= "size=64K"/>
         </transaction>
         <transaction iterations="1">
             <flowop type="disconnect" />
