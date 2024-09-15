@@ -14,13 +14,16 @@ spec:
       labels:
         app: server
     spec:
-
       containers:
       - name: server
         image: quay.io/smalleni/netperf:latest
-        command: ["iperf3"]
-        args: ["-s"]
+        command: ["/bin/sh", "-c"]
+        args: ["iperf3 -s -D && uperf -s"]
         ports:
         - containerPort: 5201
-          name: server
+          name: iperf3
+        - containerPort: 20000
+          name: uperf-control
+        - containerPort: 40000
+          name: uperf-data
       terminationGracePeriodSeconds: 0
