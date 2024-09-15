@@ -18,9 +18,20 @@ spec:
       - name: client
         image: quay.io/smalleni/netperf:latest
         command: ["sleep", "inf"]
+        env:
+        - name: nthr
+          value: "1"
+        - name: size
+          value: "64K"
+        - name: uperf_service_host
+          value: "$(UPERF_SERVICE_HOST)"
+        - name: uperf_service_port_uperf_data
+          value: "$(UPERF_SERVICE_PORT_UPERF_DATA)"
         volumeMounts:
         - name: throughput-volume
-          mountPath: /tmp/test
+          mountPath: /tmp/throughput
+        - name: rr-volume
+          mountPath: /tmp/rr
       volumes:
       - name: throughput-volume
         configMap:
@@ -28,4 +39,10 @@ spec:
           items:
           - key: throughput.xml
             path: throughput.xml
+      - name: rr-volume
+        configMap:
+          name: rr-config
+          items:
+          - key: rr.xml
+            path: rr.xml
       terminationGracePeriodSeconds: 0
