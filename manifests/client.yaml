@@ -24,9 +24,9 @@ spec:
         - name: size
           value: "64K"
         - name: uperf_service_host
-          value: "$(UPERF_SERVICE_HOST)"
+          value: "$(SERVER_SERVICE_HOST)"
         - name: uperf_service_port_uperf_data
-          value: "$(UPERF_SERVICE_PORT_UPERF_DATA)"
+          value: "$(SERVER_SERVICE_PORT_PORT40000)"
         volumeMounts:
         - name: throughput-volume
           mountPath: /tmp/throughput

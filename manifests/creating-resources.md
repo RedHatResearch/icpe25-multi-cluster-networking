@@ -8,7 +8,7 @@ On cluster-2, after exporting the appropriate path to the KUBECONFIG
 
 ```
 oc create -f server.yaml
-oc create -f service.yaml
+oc expose deployment server
 ```
 On cluster-1, after exporting the appropriate path to the KUBECONFIG
 

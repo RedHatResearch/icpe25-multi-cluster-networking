@@ -50,9 +50,8 @@ skupper link create ~/secret.token
 ### On cluster-2
 
 ```
-skupper expose svc/iperf3
-skupper expose svc/uperf
+skupper expose deployment server
 ```
 
-Now these services on cluster-2 should be visible on cluster-1 and you can conduct your performance tests between cluster-1 and cluster-2.
+Now these services on cluster-2 should be visible on cluster-1 and you can conduct your performance tests between cluster-1 and cluster-2 using this [doc](run-tests.md).
 
