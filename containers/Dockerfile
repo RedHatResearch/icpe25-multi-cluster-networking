@@ -8,6 +8,7 @@ COPY centos9-appstream.repo /etc/yum.repos.d/centos9-appstream.repo
 RUN dnf update -y && dnf install -y iperf3 \
 uperf \
 iproute \
+iputils \
 vim-minimal \
 procps-ng \
 net-tools \
