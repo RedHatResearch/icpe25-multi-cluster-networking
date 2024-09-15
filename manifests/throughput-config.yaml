@@ -8,10 +8,10 @@ data:
     <profile name="throughput">
       <group nthreads="$nthr">
           <transaction iterations="1">
-              <flowop type="connect" options="remotehost=$UPERF_CONTROL_SERVICE_HOST protocol=tcp port=$UPERF_DATA_PORT_40000_TCP_PORT"
+              <flowop type="connect" options="remotehost=$uperf_service_host protocol=tcp port=$uperf_service_port_uperf_data"/>
           </transaction>
-          <transaction duration="30s">
-              <flowop type="write" options= "size=64K"/>
+          <transaction duration="60s">
+              <flowop type="write" options="size=$size"/>
           </transaction>
           <transaction iterations="1">
               <flowop type="disconnect" />
