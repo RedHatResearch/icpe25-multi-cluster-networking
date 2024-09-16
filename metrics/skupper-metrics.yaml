@@ -1,5 +1,5 @@
 # Overhead due to skupper in the entire namespace (service-controller pod + router pod
 sum(irate(container_cpu_usage_seconds_total{namespace="east", pod=~"skupper.*", container!=""}[2m]) * 100) by (namespace)
 # Overhead of each skupper related pod in the namespace
-sum(irate(container_cpu_usage_seconds_total{namespace="east", pod=~"skupper-router.*", container!=""}[2m]) * 100) by (pod, namespace,node)
+sum(irate(container_cpu_usage_seconds_total{namespace="east", pod=~"skupper.*", container!=""}[2m]) * 100) by (pod, namespace,node)
 
