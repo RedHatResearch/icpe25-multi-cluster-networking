@@ -20,5 +20,14 @@ uperf -m /tmp/throughput/throughput.xml
 uperf -m /tmp/rr/rr.xml
 ```
 
+# wrk
+
+## On cluster-1
+
+```
+oc rsh <client-pod>
+wrk -t2 -c10 -d60s http://${NGINX_SERVICE_HOST}:${NGINX_SERVICE_PORT}/1024.html
+```
+
 All the required remote IPs/ports will be auto-populated in the config using environment variables.
 
