@@ -26,4 +26,8 @@ spec:
           name: uperf-control
         - containerPort: 40000
           name: uperf-data
+        - containerPort: 8080
+          name: http
+        - containerPort: 8443
+          name: http2
       terminationGracePeriodSeconds: 0
