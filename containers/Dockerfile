@@ -7,6 +7,7 @@ RUN dnf install -y --nodocs https://dl.fedoraproject.org/pub/epel/epel-release-l
 COPY centos9-appstream.repo /etc/yum.repos.d/centos9-appstream.repo
 RUN dnf update -y && dnf install -y iperf3 \
 uperf \
+nginx \
 iproute \
 iputils \
 vim-minimal \
@@ -25,7 +26,9 @@ conntrack \
 tar \
 --enablerepo=centos9-appstream \
 && rm -Rf /var/cache/yum
+RUN chmod 755 /etc/nginx/ssl
 COPY --from=builder /wrk/wrk /usr/bin/wrk
 COPY json.lua json.lua
+COPY nginx/root ./
 RUN curl -sS -L https://github.com/rsevilla87/hloader/releases/download/v0.2.1/hloader-Linux-v0.2.1-$(arch | sed s/aarch64/arm64/).tar.gz | tar xz -C /usr/bin/
 
