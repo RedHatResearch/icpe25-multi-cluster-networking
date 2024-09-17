@@ -18,7 +18,7 @@ spec:
       - name: server
         image: quay.io/smalleni/netperf:latest
         command: ["/bin/sh", "-c"]
-        args: ["iperf3 -s -D && uperf -s"]
+        args: ["/usr/sbin/nginx; iperf3 -s -D && uperf -s"]
         ports:
         - containerPort: 5201
           name: iperf3
