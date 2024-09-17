@@ -26,7 +26,7 @@ uperf -m /tmp/rr/rr.xml
 
 ```
 oc rsh <client-pod>
-wrk -t2 -c10 -d60s http://${NGINX_SERVICE_HOST}:${NGINX_SERVICE_PORT}/1024.html
+wrk -t2 -c10 -d60s http://${SERVER_SERVICE_HOST}:${SERVER_SERVICE_PORT_PORT_4}/1024.html
 ```
 
 All the required remote IPs/ports will be auto-populated in the config using environment variables.
