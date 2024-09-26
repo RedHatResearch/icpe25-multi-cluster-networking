@@ -51,7 +51,6 @@ skupper link create ~/secret.token
 
 ```
 skupper expose deployment server
-skupper expose deployment nginx
 ```
 
 Now these services on cluster-2 should be visible on cluster-1 and you can conduct your performance tests between cluster-1 and cluster-2 using this [doc](run-tests.md).

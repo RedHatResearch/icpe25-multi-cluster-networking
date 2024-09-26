@@ -26,7 +26,7 @@ spec:
         - name: uperf_service_host
           value: "$(SERVER_SERVICE_HOST)"
         - name: uperf_service_port_uperf_data
-          value: "$(SERVER_SERVICE_PORT_PORT_3)"
+          value: "$(SERVER_SERVICE_PORT_PORT40000)"
         volumeMounts:
         - name: throughput-volume
           mountPath: /tmp/throughput

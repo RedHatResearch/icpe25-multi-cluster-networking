@@ -9,8 +9,6 @@ On cluster-2, after exporting the appropriate path to the KUBECONFIG
 ```
 oc create -f server.yaml
 oc expose deployment server
-oc create -f nginx.yaml
-oc expose deployment nginx
 ```
 On cluster-1, after exporting the appropriate path to the KUBECONFIG
 
