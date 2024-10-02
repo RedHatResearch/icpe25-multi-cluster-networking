@@ -45,13 +45,14 @@ spec:
           items:
           - key: rr.xml
             path: rr.xml
-      podAntiAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchExpressions:
-            - key: app
-              operator: In
-              values:
-              - server
-          topologyKey: "kubernetes.io/hostname"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - server
+            topologyKey: "kubernetes.io/hostname"
       terminationGracePeriodSeconds: 0
