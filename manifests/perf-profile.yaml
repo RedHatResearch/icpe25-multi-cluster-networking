@@ -1,0 +1,25 @@
+apiVersion: performance.openshift.io/v2
+kind: PerformanceProfile
+metadata:
+  name: perf-profile
+spec:
+  cpu:
+    # node0 CPUs: 0,2,..,78
+    # node1 CPUs: 1,3,..,79
+    # siblings: (0,40), (1,41)...
+    isolated: 4-39,44-79
+    reserved: 0-3,40-43
+  globallyDisableIrqLoadBalancing: false
+  nodeSelector:
+    node-role.kubernetes.io/worker: ""
+  workloadHints:
+    realTime: false
+    highPowerConsumption: false
+    perPodPowerManagement: true
+  realTimeKernel:
+    enabled: false
+  numa:
+    # All guaranteed QoS containers get resources from a single NUMA node
+    topologyPolicy: "single-numa-node"
+  net:
+    userLevelNetworking: false
