@@ -20,7 +20,7 @@ spec:
       labels:
         app: client
     spec:
-      runtimeClassName: perf-profile
+      runtimeClassName: performance-perf-profile
       hostNetwork: true
       securityContext:
         privileged: true
