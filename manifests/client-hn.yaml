@@ -4,16 +4,16 @@ metadata:
   name: client-hn
   namespace: default
   labels:
-    app: client
+    app: client-hn
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client
+      app: client-hn
   template:
     metadata:
       labels:
-        app: client
+        app: client-hn
     spec:
       hostNetwork: true
       securityContext:

@@ -1,22 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client
+  name: client-pp
   namespace: default
+  annotations:
+    # Disable CPU balance with CRIO
+    irq-load-balancing.crio.io: "disable"
+    cpu-load-balancing.crio.io: "disable"
+    cpu-quota.crio.io: "disable"
   labels:
-    app: client
+    app: client-pp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client
+      app: client-pp
   template:
     metadata:
       labels:
-        app: client
+        app: client-pp
     spec:
+      runtimeClassName: performance-perf-profile
       containers:
-        - name: client
+        - name: client-pp
           image: quay.io/smalleni/netperf:latest
           command: ["sleep", "inf"]
           env:
@@ -33,6 +39,13 @@ spec:
               mountPath: /tmp/throughput
             - name: rr-volume
               mountPath: /tmp/rr
+          resources:
+            requests:
+              cpu: "4"
+              memory: 1024M
+            limits:
+              cpu: "4"
+              memory: 1024M
       volumes:
         - name: throughput-volume
           configMap:

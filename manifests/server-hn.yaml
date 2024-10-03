@@ -4,16 +4,16 @@ metadata:
   name: server-hn
   namespace: default
   labels:
-    app: server
+    app: server-hn
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: server
+      app: server-hn
   template:
     metadata:
       labels:
-        app: server
+        app: server-hn
     spec:
       hostNetwork: true
       securityContext:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: server-hn-pp
+  name: server-pp
   namespace: default
   annotations:
     # Disable CPU balance with CRIO
@@ -9,23 +9,20 @@ metadata:
     cpu-load-balancing.crio.io: "disable"
     cpu-quota.crio.io: "disable"
   labels:
-    app: server-hn-pp
+    app: server-pp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: server-hn-pp
+      app: server-pp
   template:
     metadata:
       labels:
-        app: server-hn-pp
+        app: server-pp
     spec:
       runtimeClassName: performance-perf-profile
-      hostNetwork: true
-      securityContext:
-        privileged: true
       containers:
-        - name: server-hn-pp
+        - name: server-pp
           image: quay.io/smalleni/netperf:latest
           command: ["/bin/sh", "-c"]
           args: ["/usr/sbin/nginx; iperf3 -s -D && uperf -s"]

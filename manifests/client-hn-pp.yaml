@@ -9,16 +9,16 @@ metadata:
     cpu-load-balancing.crio.io: "disable"
     cpu-quota.crio.io: "disable"
   labels:
-    app: client
+    app: client-hn-pp
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: client
+      app: client-hn-pp
   template:
     metadata:
       labels:
-        app: client
+        app: client-hn-pp
     spec:
       runtimeClassName: performance-perf-profile
       hostNetwork: true
