@@ -31,7 +31,7 @@ spec:
               name: iperf3
             - containerPort: 20000
               name: uperf-control
-            - containerPort: 40000
+            - containerPort: 30000
               name: uperf-data
             - containerPort: 8080
               name: http
