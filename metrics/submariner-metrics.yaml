@@ -1,0 +1,5 @@
+# Overhead due to submariner in the entire namespace (gateway + lighthouse + metrics + operator + routeagents)
+sum(irate(container_cpu_usage_seconds_total{namespace="submariner-operator", pod=~"submariner*", container!=""}[2m]) * 100) by (namespace)
+# Overhead of each submariner related pod in the namespace
+sum(irate(container_cpu_usage_seconds_total{namespace="submariner-operator", pod=~"submariner*", container!=""}[2m]) * 100) by (pod, namespace,node)
+
