@@ -3,7 +3,7 @@ Once the tests clusters have been deployed, resources [created](../manifests/cre
 # iperf3
 
 ## On cluster-1
- 
+
 ```
 oc rsh <client-pod>
 iperf3 -c <server_service_ip>

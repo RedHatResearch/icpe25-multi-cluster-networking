@@ -23,13 +23,13 @@ Deploy the resources need to setup the test by following this [doc](../manifests
 skupper init
 skupper status
 ```
-	
+
 ### On cluster-2
 
 ```
 skupper init
 skupper status
-```  
+```
 
 ## Link sites
 
@@ -37,7 +37,7 @@ skupper status
 
 ```
 skupper token create ~/secret.token
-```  
+```
 
 ### On cluster-2
 
@@ -54,4 +54,3 @@ skupper expose deployment server
 ```
 
 Now these services on cluster-2 should be visible on cluster-1 and you can conduct your performance tests between cluster-1 and cluster-2 using this [doc](run-tests.md).
-
