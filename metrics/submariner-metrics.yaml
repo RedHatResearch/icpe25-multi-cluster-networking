@@ -1,2 +1,13 @@
 # Overhead due to submariner in the entire namespace (gateway + lighthouse + metrics + operator + routeagents)
-sum(irate(container_cpu_usage_seconds_total{namespace="submariner-operator",container!=""}[2m]) * 100) by (namespace)
+## CPU
+sum(irate(container_cpu_usage_seconds_total{namespace="submariner-operator",container!=""}[2m])) by (namespace)
+
+## Memory
+sum(container_memory_working_set_bytes{namespace="submariner-operator",container!=""}) by (namespace)
+
+# Overhead due to the submariner gateway pod
+## CPU
+sum(irate(container_cpu_usage_seconds_total{namespace="submariner-operator", pod=~"submariner-gateway.*", container!=""}[2m])) by (namespace,pod)
+
+## Memory
+sum(container_memory_working_set_bytes{namespace="submariner-operator", pod=~"submariner-gateway.*", container!=""}) by (namespace,pod)
