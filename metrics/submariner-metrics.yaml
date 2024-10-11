@@ -11,3 +11,6 @@ sum(irate(container_cpu_usage_seconds_total{namespace="submariner-operator", pod
 
 ## Memory
 sum(container_memory_working_set_bytes{namespace="submariner-operator", pod=~"submariner-gateway.*", container!=""}) by (namespace,pod)
+
+# Overhead in the gateway node
+sum(irate(node_cpu_seconds_total{mode=~"softirq|system"}[2m])) by (instance) and on (instance) label_replace(kube_node_role{role="gateway"}, "instance", "$1", "node", "(.+)")
