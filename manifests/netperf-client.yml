@@ -23,8 +23,7 @@ spec:
         app: netperf
     spec:
       containers:
-      - command:
-        - sleep inf
+      - command: [sleep inf]
         image: quay.io/cloud-bulldozer/k8s-netperf
         imagePullPolicy: Always
         name: k8s-netperf
