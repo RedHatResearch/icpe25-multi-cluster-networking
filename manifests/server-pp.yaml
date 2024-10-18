@@ -19,6 +19,15 @@ spec:
       labels:
         app: server-pp
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: Exists
+              - key: node-role.kubernetes.io/gateway
+                operator: DoesNotExist
       runtimeClassName: performance-perf-profile
       containers:
         - name: server-pp
