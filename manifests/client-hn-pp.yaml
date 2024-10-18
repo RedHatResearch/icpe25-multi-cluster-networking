@@ -69,6 +69,6 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - server
+                      - server-pp-hn
               topologyKey: "kubernetes.io/hostname"
       terminationGracePeriodSeconds: 0
