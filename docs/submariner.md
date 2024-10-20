@@ -4,8 +4,10 @@ For the purposes of testing, we will be creating resources on two different clus
 
 ## Submariner
 
+### uperf
+
 On **cluster-2**:
- - Make sure the server pod is running
+ - Make sure the uperf server pod is running
  - Create the service:
     ```
     $ kubectl create -f server-svc-pp.yaml
@@ -13,10 +15,11 @@ On **cluster-2**:
  - Export the service (it creates a `ServiceExport` object):
     ```
     $ subctl export service --namespace default server-pp
+     ✓ Service exported successfully
     ```
  - Check the Status information on the ServiceExport object:
     ```
-    $ kubectl -n default describe serviceexports | egrep "Message|Status"
+    $ kubectl -n default describe serviceexports serverpp | egrep "Message|Status"
     Status:
         Message:
         Status:                True
@@ -59,4 +62,43 @@ On **cluster-1**:
     Threads: 1, size: 1024
     Total     18.52GB /  62.37(s) =     2.55Gb/s      311417op/s
     ...
+    ```
+
+### netperf
+
+On **cluster-2**:
+ - Make sure the netperf server pod is running
+ - Create the service:
+    ```
+    $ kubectl create -f netperf-svc.yaml
+    ```
+ - Export the service (it creates a `ServiceExport` object):
+    ```
+    $ subctl export service --namespace default netperf-server
+     ✓ Service exported successfully
+    ```
+ - Check the Status information on the ServiceExport object:
+    ```
+    $ kubectl -n default describe serviceexports netperf-server | egrep "Message|Status"
+    Status:
+        Message:
+        Status:                True
+        Message:               Service was successfully exported to the broker
+        Status:                True
+    ```
+
+On **cluster-1**:
+ - Verify that the exported service was imported to cluster-1 as expected. Submariner (via Lighthouse) automatically creates a corresponding ServiceImport in the service namespace:
+    ```
+    $ kubectl get -n default serviceimport
+    NAME             TYPE           IP    AGE
+    netperf-server   ClusterSetIP         10h
+    ```
+ - Log into the client pod:
+    ```
+    $ oc rsh netperf-6dcfff7bc6-vkv9v
+    ```
+ - Run the networking latency test:
+    ```
+    sh-5.1# netperf -l 60 -H netperf-server.default.svc.clusterset.local -t TCP_RR -- -P 10000 -k rt_latency,p99_latency
     ```
