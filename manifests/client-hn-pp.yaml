@@ -62,6 +62,12 @@ spec:
               - key: rr.xml
                 path: rr.xml
       affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: Exists
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
@@ -69,6 +75,6 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - server-pp-hn
+                      - server-hn-pp
               topologyKey: "kubernetes.io/hostname"
       terminationGracePeriodSeconds: 0
