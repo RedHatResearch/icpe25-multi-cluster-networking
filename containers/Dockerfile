@@ -1,7 +1,9 @@
 FROM registry.access.redhat.com/ubi9/ubi:latest as builder
-RUN dnf install -y make git unzip gcc perl
+RUN dnf install -y make git unzip gcc perl zlib-devel openssl-devel
 RUN git clone https://github.com/wg/wrk.git --depth=1
 RUN cd wrk && make -j $(nproc)
+RUN git clone https://github.com/giltene/wrk2.git --depth=1
+RUN cd wrk2 && make -j $(nproc)
 FROM registry.access.redhat.com/ubi9/ubi:latest
 RUN dnf install -y --nodocs https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 COPY centos9-appstream.repo /etc/yum.repos.d/centos9-appstream.repo
@@ -27,6 +29,7 @@ tar \
 --enablerepo=centos9-appstream \
 && rm -Rf /var/cache/yum
 COPY --from=builder /wrk/wrk /usr/bin/wrk
+COPY --from=builder /wrk2/wrk /usr/bin/wrk2
 COPY json.lua json.lua
 COPY nginx/root ./
 RUN chmod 755 /etc/nginx/ssl
