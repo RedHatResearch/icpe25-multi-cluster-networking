@@ -4,7 +4,7 @@
 
 ## Test Environment Setup
 
-Please follow [this](manifests/creating-resources.md) for test environment setup once you have deployed two OpenShift/Kubernetes clusters.
+Please follow [this](docs/creating-resources.md) for test environment setup once you have deployed two OpenShift/Kubernetes clusters.
 
 ## Evaluation
 
