@@ -9,6 +9,7 @@ Please follow [this](docs/creating-resources.md) for test environment setup once
 ## Evaluation
 
 We plan to evaluate the following multi-cluster networking technologies:
+
 * [Skupper](docs/skupper.md)
 * [Submariner](docs/submariner.md)
-* Istio Multi-Cluster Mesh
+* [Istio Multi-Cluster Mesh](docs/istio-multicluster.md)

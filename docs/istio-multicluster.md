@@ -6,7 +6,7 @@ We've used the [multi-primary on different networks model](https://istio.io/late
 
 Service workloads across cluster boundaries communicate indirectly, via dedicated ingress gateways for east-west traffic. The gateway in each cluster must be reachable from the other cluster.
 
-Deployment of Istio `multi-primary on different networks` is out of scope of this document, this document will only walkthrough the process of the test execution.
+Deployment of **Istio multi-primary on different networks** is out of scope of this document, this document will only walkthrough the process of the test execution.
 
 ## Creating resources
 
