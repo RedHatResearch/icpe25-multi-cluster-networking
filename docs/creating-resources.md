@@ -6,13 +6,14 @@ Please follow the below steps exactly in the order specified for the test setup.
 
 On **cluster-2**, after exporting the appropriate path to the KUBECONFIG
 
-```
+```shell
 $ kubectl create -f server.yaml
 $ kubectl expose deployment server
 ```
+
 On **cluster-1**, after exporting the appropriate path to the KUBECONFIG
 
-```
+```shell
 $ kubectl create -f uperf-configs.yaml
 $ kubectl create -f client.yaml
 ```

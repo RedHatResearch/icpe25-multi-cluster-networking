@@ -1,4 +1,4 @@
-Skupper creates a Virtual Application Networking that enables multi-cluster networking at the L7 level. It supports any TCP based protocol. To connect the iperf3/uperf client running on one cluster to the server running on another cluster, please follow the below steps. Installation of skupper cli is beyond the scope of this doc, we will only cover skupper configuration to connect namesapces across different OpenShift clusters.
+Skupper creates a Virtual Application Networking that enables multi-cluster networking at the L7 level. It supports any TCP based protocol. To connect the iperf3/uperf client running on one cluster to the server running on another cluster, please follow the below steps. Installation of skupper cli is beyond the scope of this doc, we will only cover skupper configuration to connect namespaces across different OpenShift clusters.
 
 ### On cluster-1
 

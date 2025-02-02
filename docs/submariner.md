@@ -38,7 +38,7 @@ On **cluster-1**:
     ```
     $ oc rsh client-pp-7544c8c457-7lvzf
     ```
- - Run the networking througput test:
+ - Run the networking throughput test:
     ```
     sh-5.1# for size in 64 1024 8192; do for th in 1 2 4; do for i in {1..3}; do echo "Threads: ${th}, size: ${size}"; nthr=$th size=$size uperf_service_host=server-pp.default.svc.clusterset.local uperf_service_port_uperf_data=30000 uperf -m /tmp/throughput/throughput.xml| grep Total; sleep 10s ; done; done; done
     Threads: 1, size: 64
