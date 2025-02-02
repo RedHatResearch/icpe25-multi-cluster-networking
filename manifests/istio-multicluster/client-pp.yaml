@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-pp
+  namespace: istio-perf
+  labels:
+    app: client-pp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-pp
+  template:
+    metadata:
+      annotations:
+        # Disable CPU balance with CRIO
+        irq-load-balancing.crio.io: "disable"
+        cpu-quota.crio.io: "disable"
+      labels:
+        app: client-pp
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: Exists
+              - key: node-role.kubernetes.io/gateway
+                operator: DoesNotExist
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - server
+              topologyKey: "kubernetes.io/hostname"
+      runtimeClassName: performance-perf-profile
+      containers:
+        - name: client-pp
+          image: quay.io/smalleni/netperf:latest
+          command: ["sleep", "inf"]
+          env:
+            - name: nthr
+              value: "1"
+            - name: size
+              value: "64K"
+            - name: uperf_service_host
+              value: "$(SERVER_SERVICE_HOST)"
+            - name: uperf_service_port_uperf_data
+              value: "$(SERVER_SERVICE_PORT_PORT40000)"
+          volumeMounts:
+            - name: throughput-volume
+              mountPath: /tmp/throughput
+            - name: rr-volume
+              mountPath: /tmp/rr
+          resources:
+            requests:
+              cpu: "4"
+              memory: 1024M
+            limits:
+              cpu: "4"
+              memory: 1024M
+      volumes:
+        - name: throughput-volume
+          configMap:
+            name: throughput-config
+            items:
+              - key: throughput.xml
+                path: throughput.xml
+        - name: rr-volume
+          configMap:
+            name: rr-config
+            items:
+              - key: rr.xml
+                path: rr.xml
+      terminationGracePeriodSeconds: 0

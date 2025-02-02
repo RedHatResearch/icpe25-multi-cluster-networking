@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-pp
+  namespace: istio-perf
+  labels:
+    app: server-pp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server-pp
+  template:
+    metadata:
+      annotations:
+        # Disable CPU balance with CRIO
+        irq-load-balancing.crio.io: "disable"
+        cpu-quota.crio.io: "disable"
+      labels:
+        app: server-pp
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/worker
+                operator: Exists
+              - key: node-role.kubernetes.io/gateway
+                operator: DoesNotExist
+      runtimeClassName: performance-perf-profile
+      containers:
+        - name: server-pp
+          image: quay.io/smalleni/netperf:latest
+          command: ["/bin/sh", "-c"]
+          args: ["/usr/sbin/nginx; iperf3 -s -D && uperf -s"]
+          ports:
+            - containerPort: 5201
+              name: iperf3
+            - containerPort: 20000
+              name: uperf-control
+            - containerPort: 30000
+              name: uperf-data
+            - containerPort: 8080
+              name: http
+            - containerPort: 8443
+              name: http2
+          resources:
+            requests:
+              cpu: "4"
+              memory: 1024M
+            limits:
+              cpu: "4"
+              memory: 1024M
+      terminationGracePeriodSeconds: 0

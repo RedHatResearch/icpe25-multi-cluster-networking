@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: throughput-config
+  namespace: istio-perf
+data:
+  throughput.xml: |
+    <?xml version="1.0"?>
+    <profile name="throughput">
+      <group nthreads="$nthr">
+          <transaction iterations="1">
+              <flowop type="connect" options="remotehost=$uperf_service_host protocol=tcp port=$uperf_service_port_uperf_data"/>
+          </transaction>
+          <transaction duration="60s">
+              <flowop type="write" options="size=$size"/>
+          </transaction>
+          <transaction iterations="1">
+              <flowop type="disconnect" />
+          </transaction>
+      </group>
+    </profile>
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rr-config
+data:
+  rr.xml: |
+    <?xml version="1.0"?>
+    <profile name="rr">
+      <group nthreads="$nthr">
+          <transaction iterations="1">
+              <flowop type="connect" options="remotehost=$uperf_service_host protocol=tcp port=$uperf_service_port_uperf_data"/>
+          </transaction>
+          <transaction duration="60s">
+              <flowop type="write" options="size=$size"/>
+              <flowop type="read" options="size=$size"/>
+          </transaction>
+          <transaction iterations="1">
+              <flowop type="disconnect" />
+          </transaction>
+      </group>
+    </profile>
