@@ -1,0 +1,13 @@
+Templates for different client/server setups:
+- `client-hn-pp.yaml`: Client setup with host networking
+- `client-pp.yaml`: Client setup with CNI networking
+- `netperf-client-hn.yml`: Client setup for netperf with host networking
+- `netperf-client.yml`: Client setup for netperf with CNI networking
+- `netperf-server-hn.yml`: Server setup for netperf with host networking
+- `netperf-server.yml`: Server setup for netperf with CNI networking
+- `netperf-svc.yml`: Service to expose netperf server
+- `perf-profile.yaml`: A performance profile with isolated and reserved cores
+- `server-hn-pp.yaml`: Server setup with host networking
+- `server-pp.yaml`: Server setup with CNI networking
+- `server-svc-pp.yaml`: Service to expose the server
+- `uperf-configs.yaml`: Uperf definitions for throughput intensive and request-response traffic
